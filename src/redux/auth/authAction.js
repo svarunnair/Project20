@@ -67,7 +67,7 @@ export const postSignup=(data)=>(dispatch)=>{
 }
 
 export const postSignin=(data)=>(dispatch)=>{
-    console.log("dtaa",data)
+    
     dispatch(postSigninRequiest())
     return axios({
         url:"https://reqres.in/api/register",
@@ -79,7 +79,9 @@ export const postSignin=(data)=>(dispatch)=>{
         console.log("resdataSignup",res.data)
         if(res.data.token){
             localStorage.setItem('token', res.data.token);
+            
         }
+        
         
     })
     .catch((error)=>{

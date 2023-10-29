@@ -49,9 +49,7 @@ export default function Signin() {
         navigate('/signup')
         console.log("click")
     }
-    const click=()=>{
-        navigate('/signup')
-    }
+    
 
 
 
@@ -102,8 +100,8 @@ export default function Signin() {
                 }}>
                 Sign in
               </Button>
-              <Link onClick={handleClick}>For Signup</Link>
-              <Link onClick={click}>Sign up</Link>
+              <Text onClick={handleClick}>For Signup</Text>
+              
             </Stack>
           </Stack>
         </Box>
