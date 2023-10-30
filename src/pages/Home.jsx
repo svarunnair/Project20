@@ -27,6 +27,7 @@ function Home() {
         </>
       ))}
       <Button onClick={handleLogout}>Logout</Button>
+      <Button>Cart</Button>
     </div>
   )
 }
