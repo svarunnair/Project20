@@ -20,14 +20,13 @@ function Home() {
     navigate('/signin')
   }
   return (
-    <div>Home
-      {mainData?.map((item)=>(
-        <>
-        {item.name}
-        </>
-      ))}
+    <div>Home....
+      <>
+     
+      </>
       <Button onClick={handleLogout}>Logout</Button>
       <Button>Cart</Button>
+      <Button>Payment</Button>
     </div>
   )
 }

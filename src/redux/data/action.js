@@ -33,6 +33,7 @@ export const getData=()=>(dispatch)=>{
     })
     .then((res)=>{
         dispatch(getDataSuccess(res.data))
+        console.log("resdata",res.data)
     })
     .catch((error)=>{
         dispatch(getDataFailure())
