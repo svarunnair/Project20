@@ -57,7 +57,7 @@ import {
 import { CheckIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getCart } from '../redux/data/action'
+import { deleteCart, getCart, patchCart } from '../redux/data/action'
 
 export default function Cart() {
 
@@ -76,6 +76,35 @@ export default function Cart() {
         return acc+item.price*item.quant
     },0)
 
+    const handleAdd=(quant,id)=>{
+
+        let data={
+            quant:quant+1
+        }
+        dispatch(patchCart(data,id))
+
+    }
+
+    const handleReduce=(quant,id)=>{
+
+        if(quant<2){
+            quant=2
+        }
+        let data={
+            quant:quant-1
+        }
+        dispatch(patchCart(data,id))
+
+    }
+
+
+
+
+
+    const hanldeDelete=(id)=>{
+        dispatch(deleteCart(id))
+    }
+
 
 
 
@@ -83,7 +112,8 @@ export default function Cart() {
 
   return (
 
-
+<>
+<Box display={'flex'} gridArea={3}>
     <>
 
     {cartData.map((item)=>(
@@ -102,7 +132,7 @@ export default function Cart() {
           p={6}
           color={('gray.800', 'white')}
           align={'center'}>
-          <Text
+          {/* <Text
             fontSize={'sm'}
             fontWeight={500}
             bg={('green.50', 'green.900')}
@@ -111,7 +141,7 @@ export default function Cart() {
             color={'green.500'}
             rounded={'full'}>
             Hobby
-          </Text>
+          </Text> */}
           <Stack direction={'row'} align={'center'} justify={'center'}>
             <Text fontSize={'3xl'}></Text>
             <Text fontSize={'3x1'} fontWeight={800}>
@@ -125,8 +155,11 @@ export default function Cart() {
         <Box bg={('gray.50', 'gray.900')} px={6} py={10}>
          
           <Img src={item.image}/>
+          
           <Text color={'white'}>Rs:{item.price}/-</Text>
-          <Button
+
+          <Text color={'white'}>Quantity:{item.quant}</Text>
+          <Button onClick={()=>handleAdd(item.quant,item.id)}
             mt={10}
             w={'full'}
             bg={'green.400'}
@@ -141,7 +174,8 @@ export default function Cart() {
             }}>
            Add quantity
           </Button>
-          <Button
+
+          <Button onClick={()=>handleReduce(item.quant,item.id)}
 
 mt={10}
 w={'full'}
@@ -157,9 +191,11 @@ _focus={{
 }}
           
           >Reduce quantity</Button>
+          <Button onClick={()=>hanldeDelete(item.id)}>Delete</Button>
         </Box>
       </Box>
     </Center>
+    
         
         
         </>
@@ -171,6 +207,8 @@ Total amount : {total}
 
     
 
+    </>
+    </Box>
     </>
   )
 }

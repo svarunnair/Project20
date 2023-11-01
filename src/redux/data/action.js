@@ -14,24 +14,33 @@ export const GET_CART_REQUIEST="GET_CART_REQUIEST"
 export const GET_CART_SUCCESS="GET_CART_SUCCESS"
 export const GET_CART_FAILURE="GET_CART_FAILURE"
 
+export const PATCH_CART_REQUIEST="PATCH_CART_REQUIEST"
+export const PATCH_CART_SUCCESS="PATCH_CART_SUCCESS"
+export const PATCH_CART_FAILURE="PATCH_CART_FAILURE"
 
-const getDataRequiest=()=>{
-    return({
-        type:GET_DATA_REQUIEST
-    })
-}
-const getDataSuccess=(data)=>{
-    console.log("succData",data)
-    return({
-        type:GET_DATA_SUCCESS,
-        payload:data
-    })
-}
-const getDataFailure=()=>{
-    return({
-        type:GET_DATA_FAILURE
-    })
-}
+export const DELETE_CART_REQUIEST="DELETE_CART_REQUIEST"
+export const DELETE_CART_SUCCESS="DELETE_CART_SUCCESS"
+export const DELETE_CART_FAILURE="DELETE_CART_FAILURE"
+
+
+
+    const getDataRequiest=()=>{
+        return({
+            type:GET_DATA_REQUIEST
+        })
+    }
+    const getDataSuccess=(data)=>{
+        console.log("succData",data)
+        return({
+            type:GET_DATA_SUCCESS,
+            payload:data
+        })
+    }
+    const getDataFailure=()=>{
+        return({
+            type:GET_DATA_FAILURE
+        })
+    }
 
 const postCartRequiest=()=>{
     return({
@@ -68,6 +77,54 @@ const getCartFailure=()=>{
         type:GET_CART_FAILURE
     })
 }
+
+const patchCartRequiest=()=>{
+    return({
+        type:PATCH_CART_REQUIEST
+    })
+}
+const patchCartSuccess=(data)=>{
+    console.log("patchCart",data)
+    return({
+        type:PATCH_CART_SUCCESS,
+        payload:data
+    })
+}
+const patchCartFailure=()=>{
+    return({
+        type:PATCH_CART_FAILURE
+    })
+}
+
+const deleteCartRequiest=()=>{
+    return({
+        type:DELETE_CART_REQUIEST
+    })
+}
+const deleteCartSuccess=(data)=>{
+    
+    return({
+        type:DELETE_CART_SUCCESS,
+        payload:data
+    })
+}
+const deleteCartFailure=()=>{
+    return({
+        type:DELETE_CART_FAILURE
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export const getData =()=>(dispatch)=>{
@@ -117,6 +174,41 @@ export const getCart =()=>(dispatch)=>{
     })
     .catch((error)=>{
         dispatch(getCartFailure())
+    })
+}
+
+export const patchCart =(data,id)=>(dispatch)=>{
+   console.log("dataaaa",data,id)
+    dispatch(patchCartRequiest())
+    return axios({
+        url:`http://localhost:8000/cart/${id}`,
+        method:"PATCH",
+        data
+    })
+    .then((res)=>{
+        dispatch(patchCartSuccess(res.data))
+        console.log("resdataPATCH",res.data)
+    })
+    .catch((error)=>{
+        dispatch(patchCartFailure())
+    })
+}
+
+
+export const deleteCart =(id)=>(dispatch)=>{
+    
+    dispatch(deleteCartRequiest())
+    return axios({
+        url:`http://localhost:8000/cart/${id}`,
+        method:"DELETE",
+        data:id
+    })
+    .then((res)=>{
+        dispatch(deleteCartSuccess(res.data))
+        console.log("resdatadelete",res.data)
+    })
+    .catch((error)=>{
+        dispatch(deleteCartFailure())
     })
 }
 
