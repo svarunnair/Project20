@@ -4,6 +4,7 @@ import Signup from '../pages/Signup'
 import Signin from '../pages/Signin'
 import Home from '../pages/Home'
 import Cart from '../pages/Cart'
+import Payment from '../pages/Payment'
 
 function MainRoutes() {
 
@@ -17,6 +18,7 @@ function MainRoutes() {
         <Route path='/signin' element={<Signin/>}/>
         <Route path="/home" element={token&&<Home/>}/>
         <Route path='/cart' element={<Cart/>}/>
+        <Route path='/payment' element={<Payment/>}/>
   
 
 

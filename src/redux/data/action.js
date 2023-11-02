@@ -22,6 +22,19 @@ export const DELETE_CART_REQUIEST="DELETE_CART_REQUIEST"
 export const DELETE_CART_SUCCESS="DELETE_CART_SUCCESS"
 export const DELETE_CART_FAILURE="DELETE_CART_FAILURE"
 
+export const POST_PAYMENT_REQUIEST="POST_PAYMENT_REQUIEST"
+export const POST_PAYMENT_SUCCESS="POST_PAYMENT_SUCCESS"
+export const POST_PAYMENT_FAILURE="POST_PAYMENT_FAILURE"
+
+
+export const DELETE_ALLCART_REQUIEST="DELETE_ALLCART_REQUIEST"
+export const DELETE_ALLCART_SUCCESS="DELETE_ALLCART_SUCCESS"
+export const DELETE_ALLCART_FAILURE="DELETE_ALLCART_FAILURE"
+
+
+export const GET_PAYMENT_REQUIEST="GET_PAYMENT_REQUIEST"
+export const GET_PAYMENT_SUCCESS="GET_PAYMENT_SUCCESS"
+export const GET_PAYMENT_FAILURE="GET_PAYMENT_FAILURE"
 
 
     const getDataRequiest=()=>{
@@ -114,6 +127,60 @@ const deleteCartFailure=()=>{
     })
 }
 
+const postPaymentRequiest=()=>{
+    return({
+        type:POST_PAYMENT_REQUIEST
+    })
+}
+const postPaymentSuccess=(data)=>{
+    console.log("succData",data)
+    return({
+        type:POST_PAYMENT_SUCCESS,
+        payload:data
+    })
+}
+const postPaymentFailure=()=>{
+    return({
+        type:POST_PAYMENT_FAILURE
+    })
+}
+
+
+const deleteAllcartRequiest=()=>{
+    return({
+        type:DELETE_ALLCART_REQUIEST
+    })
+}
+const deleteAllcartSuccess=(data)=>{
+    console.log("succData",data)
+    return({
+        type:DELETE_ALLCART_SUCCESS,
+        payload:data
+    })
+}
+const deleteAllcartFailure=()=>{
+    return({
+        type:DELETE_ALLCART_FAILURE
+    })
+}
+
+const getPaymentRequiest=()=>{
+    return({
+        type:GET_PAYMENT_REQUIEST
+    })
+}
+const getPaymentSuccess=(data)=>{
+    
+    return({
+        type:GET_PAYMENT_SUCCESS,
+        payload:data
+    })
+}
+const getPaymentFailure=()=>{
+    return({
+        type:GET_DATA_FAILURE
+    })
+}
 
 
 
@@ -212,5 +279,53 @@ export const deleteCart =(id)=>(dispatch)=>{
     })
 }
 
+export const postPayment =(data)=>(dispatch)=>{
+  
+    dispatch(postPaymentRequiest())
+    return axios({
+        url:"http://localhost:8000/payment",
+        method:"POST",
+        data
+    })
+    .then((res)=>{
+        dispatch(postPaymentSuccess(res.data))
+        console.log("POSTresdata",res.data)
+    })
+    .catch((error)=>{
+        dispatch(postPaymentFailure())
+    })
+}
 
+export const deleteAllcart =(id)=>(dispatch)=>{
+    dispatch(deleteAllcartRequiest())
+    return axios({
+        url:`http://localhost:8000/cart/${id}`,
+        method:"DELETE",
+        
+    })
+    .then((res)=>{
+        dispatch(deleteAllcartSuccess(res.data))
+        console.log("AllDeleteresdata",res.data)
+    })
+    .catch((error)=>{
+        dispatch(deleteAllcartFailure())
+    })
+}
+
+
+export const getPayment =()=>(dispatch)=>{
+    
+    dispatch(getPaymentRequiest())
+    return axios({
+        url:"http://localhost:8000/payment",
+        method:"GET"
+    })
+    .then((res)=>{
+        dispatch(getPaymentSuccess(res.data))
+        console.log("getPymtresdata",res.data)
+    })
+    .catch((error)=>{
+        dispatch(getPaymentFailure())
+    })
+}
 

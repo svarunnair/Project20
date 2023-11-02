@@ -57,7 +57,7 @@ import {
 import { CheckIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { deleteCart, getCart, patchCart } from '../redux/data/action'
+import { deleteAllcart, deleteCart, getCart, patchCart, postPayment } from '../redux/data/action'
 import { useNavigate } from 'react-router-dom'
 
 export default function Cart() {
@@ -99,6 +99,12 @@ export default function Cart() {
 
     }
 
+    const handleClick=()=>{
+      navigate('/payment')
+    }
+
+    
+
 
 
 
@@ -111,6 +117,20 @@ export default function Cart() {
       navigate(-1)
     }
 
+    const handleBuy=()=>{
+
+      cartData?.map((item)=>(
+        dispatch(postPayment(item))
+      ))
+      
+    }
+
+    useEffect(()=>{
+      cartData?.map((item)=>(
+        dispatch(deleteAllcart(item.id))
+      ))
+    },[postPayment])
+
 
 
 
@@ -118,8 +138,10 @@ export default function Cart() {
   return (
 
 <>
+<Button onClick={handleClick}>Payment</Button>
 <Button display={'flex'} onClick={handleBack}>Back</Button>
 <Box display={'flex'} gridArea={3}>
+ 
     <>
 
     {cartData.map((item)=>(
@@ -209,6 +231,8 @@ _focus={{
 
 
 Total amount : {total}
+
+<Button onClick={handleBuy}>Buynow</Button>
 
 
     

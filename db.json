@@ -161,9 +161,10 @@
       "for": "Women"
     }
   ],
-  "cart": [
+  "cart": [],
+  "payment": [
     {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjBCMvFYp7fsHW9VVkxnyTO7oCTr_D3zhwpQ&usqp=CAU",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiKlg-r0CP3LOA-eoZQSZzfCenLLGEc59GPcTx5dbq0On41-dl3smzH9TLVbDXh5uPmXs&usqp=CAU",
       "name": "Stylish Red Dress",
       "price": 79.99,
       "category": "Women's Dresses",
