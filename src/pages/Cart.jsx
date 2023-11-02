@@ -58,11 +58,13 @@ import { CheckIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { deleteCart, getCart, patchCart } from '../redux/data/action'
+import { useNavigate } from 'react-router-dom'
 
 export default function Cart() {
 
     const cartData=useSelector((store)=>store.data.getCart)
     const dispatch=useDispatch()
+    const navigate=useNavigate()
 
     console.log("cartData",cartData)
 
@@ -105,6 +107,9 @@ export default function Cart() {
         dispatch(deleteCart(id))
     }
 
+    const handleBack=()=>{
+      navigate(-1)
+    }
 
 
 
@@ -113,6 +118,7 @@ export default function Cart() {
   return (
 
 <>
+<Button display={'flex'} onClick={handleBack}>Back</Button>
 <Box display={'flex'} gridArea={3}>
     <>
 

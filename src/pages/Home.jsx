@@ -51,11 +51,11 @@ import {
   Tooltip,
   Button,
 } from '@chakra-ui/react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs'
 import { FiShoppingCart } from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getData, postCart } from '../redux/data/action'
 
 const data = {
@@ -102,6 +102,7 @@ function Home() {
 
     const mainData=useSelector((store)=>store.data.data)
     const dispatch=useDispatch()
+    const[sort,setSort]=useState([])
   
     console.log("mainData",mainData)
   
@@ -117,6 +118,44 @@ function Home() {
       item.quant=1
       dispatch(postCart(item))
     }
+    const handlenavCart=()=>{
+      navigate('/cart')
+    }
+
+    const handleSortH=()=>{
+      let sortData=mainData.sort((a,b)=>{
+        return (b.price-a.price)
+      })
+      setSort([...sortData])
+    }
+
+    const handleSortL=()=>{
+      let sortData=mainData.sort((a,b)=>{
+        return (a.price-b.price)
+      })
+      setSort([...sortData])
+    }
+
+    const handleMale=()=>{
+      let male=mainData.filter((item)=>{
+        return (item.for==="Men")
+      })
+      setSort(male)
+    }
+
+    const handleFemail=()=>{
+      let femail=mainData.filter((item)=>{
+        return (item.for==="Women")
+      })
+      setSort(femail)
+    }
+    useEffect(()=>{
+      setSort(mainData)
+    },[mainData])
+
+    const handleNext=()=>{
+      navigate(+1)
+    }
 
 
   return (
@@ -124,9 +163,15 @@ function Home() {
     <>
 
     <Button onClick={handleLogout} >Logout</Button>
+    <Button onClick={handlenavCart}>Cart</Button>
+    <Button onClick={handleSortH}>Sort price H to L</Button>
+    <Button onClick={handleSortL}>Sort price L to H</Button>
+    <Button onClick={handleMale}>Male</Button>
+    <Button onClick={handleFemail}>Femail</Button>
+    <Link display={"flex"} onClick={handleNext}>Next</Link>
 
 
-{mainData.map((item)=>(
+{sort.map((item)=>(
   <>
 
 <Flex p={50} w="full" alignItems="center" justifyContent="center">
